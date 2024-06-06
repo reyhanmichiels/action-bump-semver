@@ -25,7 +25,7 @@ func SetOutput(key, value string) error {
 		}
 	}()
 
-	if _, err := f.WriteString(key + "=" + value); err != nil {
+	if _, err := f.WriteString("\n" + key + "=" + value); err != nil {
 		return err
 	}
 
