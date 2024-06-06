@@ -9,8 +9,11 @@ import (
 
 func main() {
 	currentVersion := os.Getenv("current_version")
+	fmt.Println("current_version:", currentVersion)
 	level := os.Getenv("level")
+	fmt.Println("level:", level)
 	prefix := os.Getenv("preid")
+	fmt.Println("preid:", prefix)
 
 	sv := semver.Init(currentVersion)
 
