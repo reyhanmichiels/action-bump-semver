@@ -39,16 +39,20 @@ func Init(semverString string) SemanticVersion {
 	semverString = semverString[1:]
 
 	if strings.Contains(semverString, "-") {
-		lastDotIndex := strings.LastIndex(semverString, ".")
+		// check if prefix exist
 		hyphenIndex := strings.Index(semverString, "-")
+		if len(semverString[hyphenIndex+1:]) <= 1 {
+			log.Fatalf("current version is not valid")
+		}
 
-		prerelease, err = strconv.Atoi(string(semverString[lastDotIndex+1]))
+		lastDotIndex := strings.LastIndex(semverString, ".")
+		prefix = semverString[hyphenIndex+1 : lastDotIndex]
+		prerelease, err = strconv.Atoi(string(semverString[lastDotIndex+1:]))
 		if err != nil {
 			log.Fatalf("failed parsing prerelease: %v", err)
 			return SemanticVersion{}
 		}
 
-		prefix = semverString[hyphenIndex+1 : lastDotIndex]
 		semverString = semverString[:hyphenIndex]
 		isPrerelease = true
 	}
