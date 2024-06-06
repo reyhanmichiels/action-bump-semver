@@ -107,9 +107,15 @@ func (s *SemanticVersion) UpdatePatch() {
 }
 
 func (s *SemanticVersion) UpdatePrerelease(prefix string) {
-	s.Prefix = prefix
 	s.isUpdatePrerelease = true
-	s.Prerelease++
+	s.Prefix = prefix
+
+	if s.isPrerelease {
+		s.Prerelease++
+		return
+	}
+
+	s.Patch++
 }
 
 func (s *SemanticVersion) Build() string {
