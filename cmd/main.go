@@ -2,18 +2,22 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/reyhanmichiels/action-bump-server/semver"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("err load env: %v", err)
+	}
+
 	currentVersion := os.Getenv("current_version")
-	fmt.Println(fmt.Sprintf("::debug::{%v %v}", "current_version:", currentVersion))
 	level := os.Getenv("level")
-	fmt.Println(fmt.Sprintf("::debug::{%v %v}", "level:", level))
 	prefix := os.Getenv("preid")
-	fmt.Println(fmt.Sprintf("::debug::{%v %v}", "preid:", prefix))
 
 	sv := semver.Init(currentVersion)
 
