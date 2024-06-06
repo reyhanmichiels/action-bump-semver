@@ -1,0 +1,20 @@
+name: Actions Bump Semver
+description: Bump a semver version up.
+author: Reyhan Michiels
+inputs:
+  current_version:
+    description: The current version.
+    required: true
+  level:
+    description: A semver update level ({major, minor, patch, prerelease}).
+    required: false
+    default: minor
+  preid:
+    description: Identifier to be used to prefix prerelease version increments.
+    required: false
+outputs:
+  new_version:
+    description: The bumped semver version.
+runs:
+  using: docker
+  image: "Dockerfile"
