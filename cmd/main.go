@@ -2,15 +2,15 @@ package main
 
 import (
 	"fmt"
-	"os"
 
+	"github.com/reyhanmichiels/action-bump-server/action"
 	"github.com/reyhanmichiels/action-bump-server/semver"
 )
 
 func main() {
-	currentVersion := os.Getenv("INPUT_current_version")
-	level := os.Getenv("INPUT_level")
-	prefix := os.Getenv("INPUT_preid")
+	currentVersion := action.GetInput("current_version")
+	level := action.GetInput("level")
+	prefix := action.GetInput("preid")
 
 	sv := semver.Init(currentVersion)
 
