@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/reyhanmichiels/action-bump-server/action"
 	"github.com/reyhanmichiels/action-bump-server/semver"
@@ -25,5 +25,8 @@ func main() {
 		sv.UpdateMajor()
 	}
 
-	fmt.Println(fmt.Sprintf(`::set-output name=new_version::%s`, sv.Build()))
+	err := action.SetOutput("new_version", sv.Build())
+	if err != nil {
+		log.Fatal("failed set output:", err)
+	}
 }
